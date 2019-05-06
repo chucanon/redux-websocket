@@ -71,15 +71,15 @@ const createMiddleware = (): Middleware => {
     attempts = 1;
   }
 
-  const generateInterval = (k: number) => Math.min(30, (Math.pow(2, k) - 1)) * 1000;
+  // const generateInterval = (k: number) => Math.min(30, (Math.pow(2, k) - 1)) * 1000;
   function handleClosed(dispatch: Dispatch) {
     if (!websocketConfig || !websocketConfig.autoReconnect) return;
-    const time = generateInterval(attempts);
+    // const time = generateInterval(attempts);
     const retryAttempt = () => {
       attempts += 1;
       handleConnect(dispatch, websocketConfig);
     };
-    setTimeout(retryAttempt, time);
+    setTimeout(retryAttempt, 2000);
   }
 
   return store => next => action => {
